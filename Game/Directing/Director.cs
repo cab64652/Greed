@@ -49,9 +49,12 @@ namespace Greed.Game.Directing
         /// <param name="cast">The given cast.</param>
         private void GetInputs(Cast cast)
         {
-            Actor robot = cast.GetFirstActor("robot");
+            Actor miner = cast.GetFirstActor("miner");
             Point velocity = _keyboardService.GetDirection();
-            robot.SetVelocity(velocity);     
+            int x = velocity.GetX();
+            int y = 0;
+            velocity = new Point(x, y);
+            miner.SetVelocity(velocity);     
         }
 
         /// <summary>
@@ -60,22 +63,32 @@ namespace Greed.Game.Directing
         /// <param name="cast">The given cast.</param>
         private void DoUpdates(Cast cast)
         {
-            Actor banner = cast.GetFirstActor("banner");
-            Actor robot = cast.GetFirstActor("robot");
-            List<Actor> artifacts = cast.GetActors("artifacts");
+            Actor miner = cast.GetFirstActor("miner");
+            Actor score = cast.GetFirstActor("score");
+            List<Actor> collectables = cast.GetActors("collectables");
+
+            int maxX = _videoService.GetWidth();
+            int maxY = _videoService.GetHeight();
+
+            miner.MoveNext(maxX, maxY);
+            foreach (Actor collectable in collectables)
+            {
+                collectable.MoveNext(maxX, maxY);
+            }
+
 
             banner.SetText("");
             int maxX = _videoService.GetWidth();
             int maxY = _videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
 
-            foreach (Actor actor in artifacts)
+            foreach (Actor collectable in collectables)
             {
-                if (robot.GetPosition().Equals(actor.GetPosition()))
+                if (miner.GetPosition().Equals(collectable.GetPosition()))
                 {
-                    Artifact artifact = (Artifact) actor;
-                    string message = artifact.GetMessage();
-                    banner.SetText(message);
+                    int points = ((Collectable) collectable).GetPoints();
+                    ((Score)score).AddPoints(points);
+                    cast.RemoveActor("collectables", collectable);
                 }
             } 
         }
