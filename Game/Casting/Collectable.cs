@@ -13,7 +13,7 @@ namespace Greed.Game.Casting
             return _points;
         }
 
-        public int SetPoints(int points)
+        public void SetPoints(int points)
         {
             _points = points;
         }

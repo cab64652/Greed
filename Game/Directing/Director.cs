@@ -91,11 +91,11 @@ namespace Greed.Game.Directing
                 }
 
                 Collectable collectable = new Collectable();
-                collectable.SetText(text);
+                collectable.SetText(symbol);
                 collectable.SetFontSize(15);
                 collectable.SetColor(color);
                 collectable.SetPosition(position);
-                collectaable.SetVelocity(new Point(0, 5));
+                collectable.SetVelocity(new Point(0, 5));
                 collectable.SetPoints(points);
                 cast.AddActor("collectables", collectable);
             }
@@ -114,10 +114,10 @@ namespace Greed.Game.Directing
             }
 
 
-            banner.SetText("");
-            int maxX = _videoService.GetWidth();
-            int maxY = _videoService.GetHeight();
-            robot.MoveNext(maxX, maxY);
+            // banner.SetText("");
+            // int maxX = _videoService.GetWidth();
+            // int maxY = _videoService.GetHeight();
+            // robot.MoveNext(maxX, maxY);
 
             foreach (Actor collectable in collectables)
             {
