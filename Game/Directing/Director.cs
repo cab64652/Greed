@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Greed.Game.Casting;
 using Greed.Game.Services;
@@ -63,6 +64,41 @@ namespace Greed.Game.Directing
         /// <param name="cast">The given cast.</param>
         private void DoUpdates(Cast cast)
         {
+            Random random = new Random();
+            for (int i = 0; i < 23; i++)
+            {
+                int x = random.Next(1, 60);
+                int y = 0;
+                Point position = new Point(x, y);
+                position = position.Scale(15);
+
+                int r = random.Next(0, 256);
+                int g = random.Next(0, 256);
+                int b = random.Next(0, 256);
+                Color color = new Color(r, g, b);
+
+                string symbol = "*";
+                int points = 20;
+                int isRock = random.Next(0, 1);
+                if (isRock == 1)
+                {
+                    symbol = "@";
+                    points = -20;
+                }
+                else
+                {
+                    
+                }
+
+                Collectable collectable = new Collectable();
+                collectable.SetText(text);
+                collectable.SetFontSize(15);
+                collectable.SetColor(color);
+                collectable.SetPosition(position);
+                collectable.SetPoints(points);
+                cast.AddActor("collectables", collectable);
+            }
+
             Actor miner = cast.GetFirstActor("miner");
             Actor score = cast.GetFirstActor("score");
             List<Actor> collectables = cast.GetActors("collectables");
