@@ -65,7 +65,7 @@ namespace Greed.Game.Directing
         private void DoUpdates(Cast cast)
         {
             Random random = new Random();
-            for (int i = 0; i < 23; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int x = random.Next(1, 60);
                 int y = 0;
@@ -95,6 +95,7 @@ namespace Greed.Game.Directing
                 collectable.SetFontSize(15);
                 collectable.SetColor(color);
                 collectable.SetPosition(position);
+                collectaable.SetVelocity(new Point(0, 5));
                 collectable.SetPoints(points);
                 cast.AddActor("collectables", collectable);
             }
