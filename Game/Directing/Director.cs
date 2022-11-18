@@ -65,7 +65,7 @@ namespace Greed.Game.Directing
         private void DoUpdates(Cast cast)
         {
             Random random = new Random();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 int x = random.Next(1, 60);
                 int y = 0;
@@ -77,9 +77,9 @@ namespace Greed.Game.Directing
                 int b = random.Next(0, 256);
                 Color color = new Color(r, g, b);
 
-                string symbol = "*";
-                int points = 20;
-                int isRock = random.Next(0, 1);
+                string symbol;
+                int points;
+                int isRock = random.Next(0, 2);
                 if (isRock == 1)
                 {
                     symbol = "@";
@@ -87,15 +87,16 @@ namespace Greed.Game.Directing
                 }
                 else
                 {
-                    
+                    symbol = "*";
+                    points = 20;
                 }
 
                 Collectable collectable = new Collectable();
                 collectable.SetText(symbol);
-                collectable.SetFontSize(15);
+                collectable.SetFontSize(25);
                 collectable.SetColor(color);
                 collectable.SetPosition(position);
-                collectable.SetVelocity(new Point(0, 5));
+                collectable.SetVelocity(new Point(0, 10));
                 collectable.SetPoints(points);
                 cast.AddActor("collectables", collectable);
             }
@@ -112,12 +113,6 @@ namespace Greed.Game.Directing
             {
                 collectable.MoveNext(maxX, maxY);
             }
-
-
-            // banner.SetText("");
-            // int maxX = _videoService.GetWidth();
-            // int maxY = _videoService.GetHeight();
-            // robot.MoveNext(maxX, maxY);
 
             foreach (Actor collectable in collectables)
             {

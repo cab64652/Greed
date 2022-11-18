@@ -13,7 +13,7 @@ namespace Greed.Game.Casting
     public class Actor
     {
         private string _text = "";
-        private int _fontSize = 15;
+        private int _fontSize = 30;
         private Color _color = new Color(255, 255, 255); // white
         private Point _position = new Point(0, 0);
         private Point _velocity = new Point(0, 0);
